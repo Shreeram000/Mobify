@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: url('bg2.jpg'); /* Add your background image */
+    background-size: cover; /* Cover the entire body */
+    background-position: center; /* Center the background image */
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Use Flexbox to center content */
+    justify-content: center; /* Horizontally center the chat container */
+    align-items: center; /* Vertically center the chat container */
+    position: relative; /* Required for the gradient overlay */
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 15, 15, 0.7); /* Dark overlay for contrast */
+    z-index: 1; /* Ensures overlay is above the background */
+}
+
+.chat-container {
+    width: 800px; /* Increased width */
+    backdrop-filter: blur(15px);
+    background: rgba(10, 10, 10, 0.9); /* Darker translucent effect */
+    border: 1px solid #00ab09; /* Neon border */
+    border-radius: 15px; /* Slightly rounded corners */
+    box-shadow: 0px 5px 30px rgba(0, 255, 255, 0.5); /* Neon glow */
+    overflow: hidden;
+    z-index: 10;
+}
+
+.chat-header {
+    background: rgba(0, 255, 255, 0.1); /* Neon blue header */
+    color: #00ab09; /* Bright cyan color */
+    padding: 15px;
+    text-align: center;
+    font-size: 1.6rem;
+    position: relative;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgb(14, 2, 186); /* Glow effect */
+    font-family: 'Orbitron', sans-serif; /* Apply Orbitron font */
+}
+
+
+.chat-header .status {
+    font-size: 0.9rem;
+    color: #00ab09;
+    opacity: 0.8;
+}
+
+.chat-box {
+    padding: 20px;
+    height: 400px; /* Adjusted height */
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.5); /* Dark translucent background */
+    border-top: 1px solid #00ab09;
+    border-bottom: 1px solid #00ab09;
+    position: relative;
+    animation: gradient-shift 10s infinite ease-in-out; /* Gradient animation */
+}
+
+@keyframes gradient-shift {
+    0% {
+        background: linear-gradient(135deg, rgba(0, 57, 19, 0.3), rgba(0, 150, 150, 0.1));
+    }
+    50% {
+        background: linear-gradient(135deg, rgba(0, 57, 19, 0.3), rgba(0, 100, 100, 0.1));
+    }
+    100% {
+        background: linear-gradient(135deg, rgba(0, 57, 19, 0.3), rgba(0, 150, 150, 0.1));
+    }
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #00ab09; /* Neon scrollbar thumb */
+    border-radius: 5px;
+}
+
+.message {
+    margin-bottom: 15px;
+    transition: transform 0.3s; /* Animation for hover effect */
+}
+
+.user-message {
+    text-align: right;
+}
+
+.user-message .bubble {
+    background-color: #00ab09; /* Transparent neon bubbles */
+    color: black;
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: inline-block;
+    max-width: 80%;
+    box-shadow: 0 0 10px #00ab09; /* Glow effect */
+}
+
+.user-message .bubble:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.bot-message .bubble {
+    background-color: rgba(50, 50, 50, 0.7); /* Darker translucent bot messages */
+    color: #00ab09; /* Neon cyan color */
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: inline-block;
+    max-width: 80%;
+    box-shadow: 0 0 10px #00ab09; /* Glow effect */
+}
+
+.bot-message .bubble:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.input-area {
+    display: flex;
+    background: rgba(0, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-area input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: rgba(10, 10, 10, 0.8);
+    color: #00ab09; /* Neon text color */
+    text-shadow: 0 0 5px #00ab09; /* Glow effect */
+}
+
+.input-area input::placeholder {
+    color: #aaa;
+}
+
+.input-area button {
+    background-color: #00ab09; /* Neon button color */
+    color: #000;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-area button:hover {
+    background-color: #00ab09; /* Darker neon on hover */
+}
+
+/* Add loading spinner animation */
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    display: none;
+    border: 4px solid rgba(0, 255, 255, 0.3); /* Neon light border */
+    border-top: 4px solid #00ab09; /* Bright neon spinner */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spinner 1s linear infinite;
+    margin: 0 auto; /* Center the spinner */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+}
+
+/* Show loading spinner when active */
+.loading-active .loading-spinner {
+    display: block;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3); /* Light grey */
+    border-top: 4px solid #00ab09; /* Neon green color for spinner */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin: 5px auto; /* Center in the bubble */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
